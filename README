@@ -1,0 +1,29 @@
+/**
+ * SendGrid Newsletter / WEB PHP API ...
+ *
+ * Copyright (C) 2011  Alon Ben David
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
+ *
+ *
+ * @author Alon Ben David - CoolGeex.com
+ * 
+ * All the methods returns an array of data or one string / int
+ * If false returned you can run getLastResponseError() to see the error information
+ * If error information == NULL then no error accrued (like deleting a record returns 0 records deleted if no record found)
+ * 
+ *** CHECK sample-newsletter.php for list of methods, variables and code samples for the Newsletter API ***
+ *** CHECK sample-web.php for list of methods, variables and code samples for the WEB API ***
+ * 
+*/
