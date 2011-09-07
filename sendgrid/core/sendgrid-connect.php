@@ -109,6 +109,7 @@ class sendgridConnect {
 		curl_close($session);
 
 		$results  = json_decode ( $jsonResponse, TRUE );
+		
 		$this->lastResponseError = isset($results['error']) ? $results['error'] : NULL;
 
 		return $this->lastResponseError ? false : $results;

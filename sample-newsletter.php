@@ -22,7 +22,9 @@
  * 
  * All the methods returns an array of data or one string / int
  * If false returned you can run getLastResponseError() to see the error information
- * If error information == NULL then no error accrued (like deleting a record returns 0 records deleted if no record found)
+ * If error information == NULL then no error accrued (Ex: deleting a record returns 0 records deleted if no record found)
+ *
+ * methods that ends with _helper are not supported directly by sendgrid (they are help functions - Ex: newsletter_lists_email_edit_helper)
  * 
 */
 
@@ -46,7 +48,7 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $text - The text portion of the Newsletter being created.
  * @param string $html - The html portion of the Newsletter being created.
  */
-//$sendgrid->newsletter_add($identity, $name = 'Newsletter Using API' , $subject , $text , $html);
+$sendgrid->newsletter_add($identity, $name = 'Newsletter Using API' , $subject , $text , $html);
 
 /**
  * Edit an existing Newsletter...
@@ -57,19 +59,19 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $text - The new text portion of the Newsletter being edited.
  * @param string $html - The new html portion of the Newsletter being edited.
  */
-//$sendgrid->newsletter_edit($identity, $name , $newname = 'Newsletter Using API' , $subject , $text , $html);
+$sendgrid->newsletter_edit($identity, $name , $newname = 'Newsletter Using API' , $subject , $text , $html);
 
 /**
  * Retrieve the content of an existing Newsletter.
  * @param string $name	- Must be an existing Newsletter
  */
-//$sendgrid->newsletter_get($name);
+$sendgrid->newsletter_get($name);
 
 /**
  * Retrieve a list of all existing Newsletter.
  * @param string $name	- Can be an existing Newsletter
  */
-//$sendgrid->newsletter_list($name = '');
+$sendgrid->newsletter_list($name = '');
 //$r = $sendgrid->newsletter_list();
 //print_r($r);
 
@@ -77,7 +79,7 @@ $html = '<div>Newsletter html goes here</div>';
  * Remove the Newsletter with this name..
  * @param string $name	- Must be an existing Newsletter
  */
-//$sendgrid->newsletter_delete($name);
+$sendgrid->newsletter_delete($name);
 
 
 /**
@@ -85,7 +87,7 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $list	- Create a Recipient List with this name.
  * @param string $name	- Specify the column name for the ‘name’ associated with email addresses..
  */
-//$sendgrid->newsletter_lists_add($list , $name = '');
+$sendgrid->newsletter_lists_add($list , $name = '');
 
 
 /**
@@ -93,19 +95,19 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $list	- This is the name of the Recipient List to be renamed..
  * @param string $newlist - Specify the new name for the Recipient List.
  */
-//$sendgrid->newsletter_lists_edit($list , $newlist);
+$sendgrid->newsletter_lists_edit($list , $newlist);
 
 /**
  * Get an Existing Recipient List...
  * @param string $list	- Check for this particular list. (To list all Recipient Lists on your account exclude this parameter);
  */
-//$sendgrid->newsletter_lists_get($list = '');
+$sendgrid->newsletter_lists_get($list = '');
 
 /**
  * Remove this Recipient List....
  * @param string $list	- Must be an existing Recipient List.
  */
-//$sendgrid->newsletter_lists_delete($list);
+$sendgrid->newsletter_lists_delete($list);
 
 /**
  * Add an email to an existing Recipient List.
@@ -119,7 +121,23 @@ $html = '<div>Newsletter html goes here</div>';
  *			);
  * must use email and name fields (other fileds are optional)
  */
-//$sendgrid->newsletter_lists_email_add($list , $data);
+$sendgrid->newsletter_lists_email_add($list , $data);
+
+
+/**
+ * Edit an email of an existing Recipient List. (Not Supported by SENDGRID)
+ * @param string $list	- The list which you are editing the contact
+ * @param string $email	- The Contact which you are editing
+ * @param array $data	- Specify the name, email address, and additional fields to add to the specified Recipient List..
+ *	EX: $data = array(
+ *				'email'	=>	'test1@test.com',
+ *				'name'	=>	'John Doe',
+ *				'Address' => '1234 Cool St',
+ *				'Zip Code' => '90210',
+ *			);
+ * must use email and name fields (other fileds are optional)
+ */
+$sendgrid->newsletter_lists_email_edit_helper($list , $email , $data)
 
 
 /**
@@ -127,7 +145,7 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $list	- The list you are searching.
  * @param string $email	- Optional email addresses to search for in the Recipient List.
  */
-//$sendgrid->newsletter_lists_email_get($list , $email = '');
+$sendgrid->newsletter_lists_email_get($list , $email = '');
 
 
 /**
@@ -135,7 +153,7 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $list	- The list which you are removing email addresses from..
  * @param string $email	- Specify the email address or email addresses you wish to remove from the specified Recipient List..
  */
-//$sendgrid->newsletter_lists_email_delete($list , $email);
+$sendgrid->newsletter_lists_email_delete($list , $email);
 
 /**
  * Create a new Identity.
@@ -148,7 +166,7 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $zip	- Specify the zip code to be used for this Identity.
  * @param string $country	- Specify the country code to be used for this Identity.
  */
-//$sendgrid->newsletter_identity_add($identity , $name , $email , $address , $city , $state , $zip , $country);
+$sendgrid->newsletter_identity_add($identity , $name , $email , $address , $city , $state , $zip , $country);
 
 /**
  * Edit an existing Identity..
@@ -162,45 +180,45 @@ $html = '<div>Newsletter html goes here</div>';
  * @param string $zip	- Specify the zip code to be used for this Identity.
  * @param string $country	- Specify the country code to be used for this Identity.
  */
-//$sendgrid->newsletter_identity_edit($identity , $newidentity , $name , $email , $address , $city , $state , $zip , $country); 
+$sendgrid->newsletter_identity_edit($identity , $newidentity , $name , $email , $address , $city , $state , $zip , $country); 
 /**
  * Retrieve information associated with a particular Identity.
  * @param string $identity	- Retrieve contents of the specified Identity.
  */
-//$sendgrid->newsletter_identity_get($identity); 
+$sendgrid->newsletter_identity_get($identity); 
 
 /**
  * List all Identities on your account, or check if a particular Identity exists.
  * @param string $identity	- Check for this particular Identity. (To list all Identities on your account exclude this parameter);
  */
-//$sendgrid->newsletter_identity_list($identity = '');
+$sendgrid->newsletter_identity_list($identity = '');
 //$r = $sendgrid->newsletter_identity_list(); 
 //print_r($r);
 /**
  * Remove an Identity from your account.
  * @param string $identity	- Remove the specified Identity from your account.
  */
-//$sendgrid->newsletter_identity_delete($identity);
+$sendgrid->newsletter_identity_delete($identity);
 
 /**
  * Add one or more Recipient List to a Newsletter.
  * @param string $name	- This is the Newsletter to which you are adding Recipients Lists.
  * @param string $name	- This is the Recipient List that will be added to the Newsletter
  */
-//$sendgrid->newsletter_recipients_add($name , $list);
+$sendgrid->newsletter_recipients_add($name , $list);
 
 /**
  * Retrieve the Recipient Lists attached to an existing Newsletter.
  * @param string $name	- Retrieve the Recipient Lists of an existing Newsletter.
  */
-//$sendgrid->newsletter_recipients_get($name); 
+$sendgrid->newsletter_recipients_get($name); 
 
 /**
  * Add one or more Recipient List to a Newsletter.
  * @param string $name	- Newsletter to remove Recipient Lists from.
  * @param string $list	- Recipient Lists to remove.
  */
-//$sendgrid->newsletter_recipients_delete($name , $list); 
+$sendgrid->newsletter_recipients_delete($name , $list); 
 
 /**
  * Create a new schedule event.
@@ -209,18 +227,18 @@ $html = '<div>Newsletter html goes here</div>';
  *	Date / Time must be provided in ISO 8601 format (YYYY-MM-DD HH:MM:SS +-HH:MM);
  * @param string $after	- Number of minutes until delivery should occur. Must be a positive integer.
  */
-//$sendgrid->newsletter_schedule_add($name , $at ='' , $after ='');
+$sendgrid->newsletter_schedule_add($name , $at ='' , $after ='');
 
 /**
  * Retrieve the scheduled delivery time for an existing Newsletter.
  * @param string $name	- Retrieve the delivery time scheduled for this Newsletter.
  */
-//$sendgrid->newsletter_schedule_get($name);
+$sendgrid->newsletter_schedule_get($name);
 
 /**
  * Cancel a scheduled send for a Newsletter.
  * @param string $name	- Remove the scheduled delivery time from an existing Newsletter.
  */
-//$sendgrid->newsletter_schedule_delete($name);
+$sendgrid->newsletter_schedule_delete($name);
 
 ?>

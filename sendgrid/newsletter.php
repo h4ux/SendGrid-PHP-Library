@@ -210,6 +210,35 @@ class sendgridNewsletter extends sendgridConnect {
 		return (isset($results['inserted'])) ? $results['inserted'] : false;
 	}
 	
+	/**
+	 * Edit an email of an existing Recipient List. (Not Supported by SENDGRID)
+	 * @param string $list	- The list which you are editing the contact
+	 * @param string $email	- The Contact which you are editing
+	 * @param array $data	- Specify the name, email address, and additional fields to add to the specified Recipient List..
+	 *	EX: $data = array(
+	 *				'email'	=>	'test1@test.com',
+	 *				'name'	=>	'John Doe',
+	 *				'Address' => '1234 Cool St',
+	 *				'Zip Code' => '90210',
+	 *			);
+	 * must use email and name fields (other fileds are optional)
+	 */
+	 
+	public function newsletter_lists_email_edit_helper($list , $email , $data) {
+		
+		$originalContact = $this->newsletter_lists_email_get($list , $email);
+		
+		if(!$originalContact) return false; // if the current contact not exist nothing to edit
+		
+		$this->newsletter_lists_email_delete($list , $email); // deleteing the current contact
+
+		if(!$this->newsletter_lists_email_add($list , $data)){ // adding the new contact information
+			$this->newsletter_lists_email_add($list , $originalContact[0]); // if failes reEntering the old contact back
+			return false;
+		}
+		return 1;
+	}
+	
 	
 	/**
 	 * Get the email addresses and associated fields for a Recipient List.
