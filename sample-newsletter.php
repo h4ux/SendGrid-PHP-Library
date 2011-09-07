@@ -89,14 +89,14 @@ $html = '<div>Newsletter html goes here</div>';
 
 
 /**
- * Create a new Recipient List...
+ * Edit (Rename) an Existing Recipient List...
  * @param string $list	- This is the name of the Recipient List to be renamed..
  * @param string $newlist - Specify the new name for the Recipient List.
  */
 //$sendgrid->newsletter_lists_edit($list , $newlist);
 
 /**
- * Create a new Recipient List...
+ * Get an Existing Recipient List...
  * @param string $list	- Check for this particular list. (To list all Recipient Lists on your account exclude this parameter);
  */
 //$sendgrid->newsletter_lists_get($list = '');
@@ -114,7 +114,10 @@ $html = '<div>Newsletter html goes here</div>';
  *	EX: $data = array(
  *				'email'	=>	'test1@test.com',
  *				'name'	=>	'John Doe',
+ *				'Address' => '1234 Cool St',
+ *				'Zip Code' => '90210',
  *			);
+ * must use email and name fields (other fileds are optional)
  */
 //$sendgrid->newsletter_lists_email_add($list , $data);
 

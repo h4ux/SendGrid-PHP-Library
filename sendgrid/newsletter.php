@@ -142,7 +142,7 @@ class sendgridNewsletter extends sendgridConnect {
 	}
 	
 	/**
-	 * Create a new Recipient List...
+	 * Edit an Existing Recipient List...
 	 * @param string $list	- This is the name of the Recipient List to be renamed..
  	 * @param string $newlist - Specify the new name for the Recipient List.
 	 */
@@ -158,7 +158,7 @@ class sendgridNewsletter extends sendgridConnect {
 	}
 	
 	/**
-	 * Create a new Recipient List...
+	 * Get an Existing Recipient List...
 	 * @param string $list	- Check for this particular list. (To list all Recipient Lists on your account exclude this parameter)
 	 */
 	public function newsletter_lists_get($list = '') {
@@ -192,7 +192,10 @@ class sendgridNewsletter extends sendgridConnect {
 	 *	EX: $data = array(
 	 *				'email'	=>	'test1@test.com',
 	 *				'name'	=>	'John Doe',
+	 *				'Address' => '1234 Cool St',
+	 *				'Zip Code' => '90210',
 	 *			);
+	 * must use email and name fields (other fileds are optional)
 	 */
 	public function newsletter_lists_email_add($list , $data) {
 		$url = "newsletter/lists/email/add";
