@@ -32,7 +32,12 @@ require_once "sendgrid/web.php";
 $sg_user = 'YOUR_SEND_GRID_USER'; 
 $sg_api_key = 'YOUR_SEND_GRID_PASSWORD';
 
-//Creates a new SendGrid Newsletter API object to make calls with
+//Creates a new SendGrid Web API object to make calls with
+/*
+ * YOU CAN ALSO SET $debug to true for DEBUGGING and $curl_ssl_verify to false for disabling cert verification
+ * ($user, $key , $debug = false , $curl_ssl_verify = true)
+ *
+*/ 
 $sendgridweb = new sendgridWeb($sg_user,$sg_api_key); 
 
 /**

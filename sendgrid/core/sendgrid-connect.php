@@ -34,6 +34,8 @@ class sendgridConnect {
 	private $authUser;
 	private $authKey;
 	private $lastResponseError;
+	private $_debug;
+	private $_curl_ssl_verify;
 
 	/**
 	 * Timeout in seconds for an API call to respond
@@ -64,11 +66,15 @@ class sendgridConnect {
 	 *
 	 * @param string $user The username of the account to use
 	 * @param string $key The API key to use
+	 * @param bolean $debug Set to true to get debug information (development)
+	 * $param bolean $curl_ssl_verify set false to disable CURL ssl cert verification
 	 */
-	public function __construct($user, $key) {
+	public function __construct($user, $key , $debug = false , $curl_ssl_verify = true) {
 		$this->authUser = $user;
 		$this->authKey = $key;
 		$this->apiEndpoint = self::SG_ENDPOINT;
+		$this->_debug = $debug;
+		$this->_curl_ssl_verify = $curl_ssl_verify;
 	}
 
 		
@@ -85,14 +91,21 @@ class sendgridConnect {
 		//if(!$postData)return false;
 		
 		$postData['api_user'] = $this->authUser;
-		$postData['api_key'] = $this->authKey;
-
+		$postData['api_key']  = $this->authKey;
+		
+		$this->debugCall('DEBUG - Post Data: ' , $postData);
 
 		$url.= ".json";
 
 		$jsonUrl = $this->apiEndpoint . '/' . $url;
 		// Generate curl request
 		$session = curl_init($jsonUrl);
+		
+		$this->debugCall('DEBUG - Curl Session: ' , $session);
+		
+		//Set to FALSE to stop cURL from verifying the peer's certificate (needed for local hosts development mostly)
+		if(!$this->_curl_ssl_verify) curl_setopt($session, CURLOPT_SSL_VERIFYPEER, false);
+
 		// Tell curl to use HTTP POST
 		curl_setopt ( $session, CURLOPT_CUSTOMREQUEST, strtoupper ( $method ) );
 		// Tell curl that this is the body of the POST
@@ -107,12 +120,38 @@ class sendgridConnect {
 		// obtain response
 		$jsonResponse = curl_exec($session);
 		curl_close($session);
-
+		
+		$this->debugCall('DEBUG - Json Response: ' , $jsonResponse);
+		
 		$results  = json_decode ( $jsonResponse, TRUE );
+		
+		$this->debugCall('DEBUG - Results: ' , $results);
 		
 		$this->lastResponseError = isset($results['error']) ? $results['error'] : NULL;
 
 		return $this->lastResponseError ? false : $results;
+	}
+	
+	
+	/**
+	 * Makes a print out of every step of makeApiCall for DEBUGGING
+	 *
+	 * @param string $text The text to show before the actual debug information EX: DEBUG - Results: 
+	 * @param string / array $data the actual debug data to show
+	 */
+	private function debugCall($text = 'DEBUG : ' , $data){
+		if(!$this->_debug) return;
+		
+		$newLine = isset($_SERVER['HTTP_USER_AGENT']) ? "<br/>" : "\n";
+			
+		echo $newLine . $text;
+		//print_r($data);
+		if(is_array($data)){
+			foreach($data as $name=>$value){
+				if($name == 'api_user' || $name == 'api_key')continue;
+				echo $newLine . $name . ' => ' . $value;
+			}echo $newLine;
+		}else echo $data . $newLine;
 	}
 	
 	public function getLastResponseError() {
