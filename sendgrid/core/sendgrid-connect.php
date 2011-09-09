@@ -66,8 +66,8 @@ class sendgridConnect {
 	 *
 	 * @param string $user The username of the account to use
 	 * @param string $key The API key to use
-	 * @param bolean $debug Set to true to get debug information (development)
-	 * $param bolean $curl_ssl_verify set false to disable CURL ssl cert verification
+	 * @param boolean $debug Set to true to get debug information (development)
+	 * $param boolean $curl_ssl_verify set false to disable CURL ssl cert verification
 	 */
 	public function __construct($user, $key , $debug = false , $curl_ssl_verify = true) {
 		$this->authUser = $user;
