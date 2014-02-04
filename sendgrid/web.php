@@ -39,15 +39,16 @@ class sendgridWeb extends sendgridConnect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks. 
 	 */
-	public function bounces_get($date = '' , $days = '' , $start_date = '' , $end_date = '') {
+	public function bounces_get($date = '' , $days = '' , $start_date = '' , $end_date = '', $limit = '') {
 		$url = "bounces.get";
 		
 		$postData = array(
-			'date'		=> $date,
-			'days'		=> $days,
-		    'start_date'=> $start_date,
-		    'end_date'  => $end_date,
-		  );
+			'date'			=> $date,
+			'days'			=> $days,
+			'start_date'=> $start_date,
+			'end_date'  => $end_date,
+			'limit'			=> $limit,
+	  );
 		
 		return $this->makeApiCall ( $url , $postData );
 	}
@@ -73,15 +74,16 @@ class sendgridWeb extends sendgridConnect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks. 
 	 */
-	public function blocks_get($date = '' , $days = '' , $start_date = '' , $end_date = '') {
+	public function blocks_get($date = '' , $days = '' , $start_date = '' , $end_date = '', $limit = '') {
 		$url = "blocks.get";
 		
 		$postData = array(
-			'date'		=> $date,
-			'days'		=> $days,
-		    'start_date'=> $start_date,
-		    'end_date'  => $end_date,
-		  );
+			'date'			=> $date,
+			'days'			=> $days,
+			'start_date'=> $start_date,
+			'end_date'  => $end_date,
+			'limit'			=> $limit,
+	  );
 		
 		return $this->makeApiCall ( $url , $postData );
 	}
@@ -264,15 +266,16 @@ class sendgridWeb extends sendgridConnect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks.
 	 */
-	public function invalid_emails_get( $date = '' , $days = '' , $start_date = '' , $end_date = '' ) {
+	public function invalid_emails_get( $date = '' , $days = '' , $start_date = '' , $end_date = '', $limit = '' ) {
 		$url = "invalidemails.get";
 		
 		$postData = array(
-			'date'		=> $date,
-			'days'		=> $days,
-		    'start_date'=> $start_date,
-		    'end_date'  => $end_date,
-		  );
+			'date'			=> $date,
+			'days'			=> $days,
+			'start_date'=> $start_date,
+			'end_date'  => $end_date,
+			'limit'			=> $limit,
+	  );
 		
 		return $this->makeApiCall ( $url , $postData);
 	}
@@ -425,15 +428,16 @@ class sendgridWeb extends sendgridConnect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks.
 	 */
-	public function spamreports_get( $date = '' , $days = '' , $start_date = '' , $end_date = '') {
+	public function spamreports_get( $date = '' , $days = '' , $start_date = '' , $end_date = '', $limit = '') {
 		$url = "spamreports.get";
 		
 		$postData = array(
-			'date'		=> $date,
-			'days'		=> $days,
-		    'start_date'=> $start_date,
-		    'end_date'  => $end_date,
-		  );
+			'date'			=> $date,
+			'days'			=> $days,
+			'start_date'=> $start_date,
+			'end_date'  => $end_date,
+			'limit'			=> $limit
+	  );
 		
 		return $this->makeApiCall ( $url , $postData);
 	}
@@ -491,14 +495,15 @@ class sendgridWeb extends sendgridConnect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks.
 	 */
-	public function unsubscribes_get( $date = '' , $days = '' , $start_date = '' , $end_date = '' ) {
+	public function unsubscribes_get( $date = '' , $days = '' , $start_date = '' , $end_date = '', $limit = '' ) {
 		$url = "unsubscribes.get";
 		
 		$postData = array(
-			'date'		=> $date,
-			'days'		=> $days,
-		    'start_date'=> $start_date,
-		    'end_date'  => $end_date,
+				'date'			=> $date,
+				'days'			=> $days,
+				'start_date'=> $start_date,
+				'end_date'  => $end_date,
+				'limit'			=> $limit,
 		  );
 		
 		return $this->makeApiCall ( $url , $postData);
